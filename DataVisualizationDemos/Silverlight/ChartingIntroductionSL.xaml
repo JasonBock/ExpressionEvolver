@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="DataVisualizationDemos.ChartingIntroductionSL"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+    xmlns:local="clr-namespace:DataVisualizationDemos">
+    <Grid>
+
+        <ScrollViewer>
+            <local:WrapPanel x:Name="Container">
+
+                <StackPanel Margin="5">
+
+                    <Grid Width="400" Height="320">
+
+                        <chartingToolkit:Chart
+                            x:Name="EasingDemonstration"
+                            Title="Easing Demonstration">
+                            <chartingToolkit:ColumnSeries
+                                Title="Gelatin Sales">
+                                <!-- Custom easing function -->
+                                <chartingToolkit:ColumnSeries.TransitionEasingFunction>
+                                    <ElasticEase EasingMode="EaseOut"/>
+                                </chartingToolkit:ColumnSeries.TransitionEasingFunction>
+                                <!-- Specify an appropriate color -->
+                                <chartingToolkit:ColumnSeries.DataPointStyle>
+                                    <Style TargetType="Control">
+                                        <Setter Property="Background" Value="#ff33ff33"/>
+                                    </Style>
+                                </chartingToolkit:ColumnSeries.DataPointStyle>
+                            </chartingToolkit:ColumnSeries>
+                            <!-- Custom Y axis for range -->
+                            <chartingToolkit:Chart.Axes>
+                                <chartingToolkit:LinearAxis
+                                    Orientation="Y"
+                                    Minimum="0"
+                                    Maximum="10"
+                                    ShowGridLines="True"/>
+                            </chartingToolkit:Chart.Axes>
+                        </chartingToolkit:Chart>
+
+                    </Grid>
+
+                    <Button Content="Randomize Data" Click="RandomizeData_Click" Margin="0,10,0,0"/>
+
+                </StackPanel>
+
+            </local:WrapPanel>
+        </ScrollViewer>
+
+    </Grid>
+</UserControl>

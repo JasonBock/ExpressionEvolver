@@ -1,0 +1,263 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{960B0190-08E4-46F4-A23F-B50EB420B8F0}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DataVisualizationDemosWPF</RootNamespace>
+    <AssemblyName>DataVisualizationDemosWPF</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <ApplicationIcon>Images\DataVisualizationDemos.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NO_EASING_FUNCTIONS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;NO_EASING_FUNCTIONS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Windows.Controls.DataVisualization.Toolkit">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Toolkit\WPF35\System.Windows.Controls.DataVisualization.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WPFToolkit">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Toolkit\WPF35\WPFToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="..\Silverlight\ChartStyling.xaml">
+      <Link>ChartStyling.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\Silverlight\ColumnsWithColor.xaml">
+      <Link>ColumnsWithColor.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\Silverlight\DynamicPieGradients.xaml">
+      <Link>DynamicPieGradients.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\Silverlight\ChartingIntroduction.xaml">
+      <Link>ChartingIntroduction.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\Silverlight\InvertedAxis.xaml">
+      <Link>InvertedAxis.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\Silverlight\LetterFrequency.xaml">
+      <Link>LetterFrequency.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\Silverlight\ColumnAnnotations.xaml">
+      <Link>ColumnAnnotations.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\Silverlight\MainPage.xaml">
+      <Link>MainPage.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\Silverlight\PerformanceTweaks.xaml">
+      <Link>PerformanceTweaks.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\Silverlight\StackedSeries.xaml">
+      <Link>StackedSeries.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\Silverlight\TextLabels.xaml">
+      <Link>TextLabels.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\Silverlight\TextToChart.xaml">
+      <Link>TextToChart.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\Silverlight\TreeMapIntroduction.xaml">
+      <Link>TreeMapIntroduction.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Window1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Window1.xaml.cs">
+      <DependentUpon>Window1.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Silverlight\ChartStyling.xaml.cs">
+      <Link>ChartStyling.xaml.cs</Link>
+      <DependentUpon>ChartStyling.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\Silverlight\ColumnsWithColor.xaml.cs">
+      <Link>ColumnsWithColor.xaml.cs</Link>
+      <DependentUpon>ColumnsWithColor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\Silverlight\DataClasses\BlogPost.cs">
+      <Link>DataClasses\BlogPost.cs</Link>
+    </Compile>
+    <Compile Include="..\Silverlight\DataClasses\CodeElement.cs">
+      <Link>DataClasses\CodeElement.cs</Link>
+    </Compile>
+    <Compile Include="..\Silverlight\DataClasses\CodeElementCollection.cs">
+      <Link>DataClasses\CodeElementCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\Silverlight\DataClasses\DemoItem.cs">
+      <Link>DataClasses\DemoItem.cs</Link>
+    </Compile>
+    <Compile Include="..\Silverlight\DataClasses\EngineMeasurement.cs">
+      <Link>DataClasses\EngineMeasurement.cs</Link>
+    </Compile>
+    <Compile Include="..\Silverlight\DataClasses\EngineMeasurementCollection.cs">
+      <Link>DataClasses\EngineMeasurementCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\Silverlight\DataClasses\Helpers.cs">
+      <Link>DataClasses\Helpers.cs</Link>
+    </Compile>
+    <Compile Include="..\Silverlight\DataClasses\SalesData.cs">
+      <Link>DataClasses\SalesData.cs</Link>
+    </Compile>
+    <Compile Include="..\Silverlight\DataClasses\SalesDataCollection.cs">
+      <Link>DataClasses\SalesDataCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\Silverlight\DataClasses\ScoreData.cs">
+      <Link>DataClasses\ScoreData.cs</Link>
+    </Compile>
+    <Compile Include="..\Silverlight\DataClasses\ScoreDataCollection.cs">
+      <Link>DataClasses\ScoreDataCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\Silverlight\DataClasses\StockData.cs">
+      <Link>DataClasses\StockData.cs</Link>
+    </Compile>
+    <Compile Include="..\Silverlight\DataClasses\StockDataCollection.cs">
+      <Link>DataClasses\StockDataCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\Silverlight\DataClasses\Student.cs">
+      <Link>DataClasses\Student.cs</Link>
+    </Compile>
+    <Compile Include="..\Silverlight\DataClasses\StudentViewModel.cs">
+      <Link>DataClasses\StudentViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\Silverlight\Delay\SetterValueBindingHelper.cs">
+      <Link>Delay\SetterValueBindingHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\Silverlight\DynamicPieGradients.xaml.cs">
+      <Link>DynamicPieGradients.xaml.cs</Link>
+      <DependentUpon>DynamicPieGradients.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\Silverlight\ChartingIntroduction.xaml.cs">
+      <Link>ChartingIntroduction.xaml.cs</Link>
+      <DependentUpon>ChartingIntroduction.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\Silverlight\GlobalSuppressions.cs">
+      <Link>GlobalSuppressions.cs</Link>
+    </Compile>
+    <Compile Include="..\Silverlight\InvertedAxis.xaml.cs">
+      <Link>InvertedAxis.xaml.cs</Link>
+      <DependentUpon>InvertedAxis.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\Silverlight\LetterFrequency.xaml.cs">
+      <Link>LetterFrequency.xaml.cs</Link>
+      <DependentUpon>LetterFrequency.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\Silverlight\ColumnAnnotations.xaml.cs">
+      <Link>ColumnAnnotations.xaml.cs</Link>
+      <DependentUpon>ColumnAnnotations.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\Silverlight\MainPage.xaml.cs">
+      <Link>MainPage.xaml.cs</Link>
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\Silverlight\PerformanceTweaks.xaml.cs">
+      <Link>PerformanceTweaks.xaml.cs</Link>
+      <DependentUpon>PerformanceTweaks.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\Silverlight\StackedSeries.xaml.cs">
+      <Link>StackedSeries.xaml.cs</Link>
+      <DependentUpon>StackedSeries.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\Silverlight\TextLabels.xaml.cs">
+      <Link>TextLabels.xaml.cs</Link>
+      <DependentUpon>TextLabels.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\Silverlight\TextToChart.xaml.cs">
+      <Link>TextToChart.xaml.cs</Link>
+      <DependentUpon>TextToChart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\Silverlight\TreeMapIntroduction.xaml.cs">
+      <Link>TreeMapIntroduction.xaml.cs</Link>
+      <DependentUpon>TreeMapIntroduction.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\Silverlight\Data\BlogPostData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\DataVisualizationDemos.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

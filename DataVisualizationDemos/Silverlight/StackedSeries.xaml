@@ -1,0 +1,244 @@
+﻿<UserControl x:Class="DataVisualizationDemos.StackedSeries"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:charting="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit">
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="ColorA" Color="#ff00779e"/>
+        <SolidColorBrush x:Key="ColorB" Color="#ff9e0077"/>
+        <SolidColorBrush x:Key="ColorC" Color="#ff009e77"/>
+        <Style x:Key="DataPointStyleA" TargetType="charting:DataPoint">
+            <Setter Property="Background" Value="{StaticResource ColorA}"/>
+        </Style>
+        <Style x:Key="DataShapeStyleA" TargetType="Shape">
+            <Setter Property="Stroke" Value="{StaticResource ColorA}"/>
+            <Setter Property="Fill" Value="{StaticResource ColorA}"/>
+        </Style>
+        <Style x:Key="DataPointStyleB" TargetType="charting:DataPoint">
+            <Setter Property="Background" Value="{StaticResource ColorB}"/>
+        </Style>
+        <Style x:Key="DataShapeStyleB" TargetType="Shape">
+            <Setter Property="Stroke" Value="{StaticResource ColorB}"/>
+            <Setter Property="Fill" Value="{StaticResource ColorB}"/>
+        </Style>
+        <Style x:Key="DataPointStyleC" TargetType="charting:DataPoint">
+            <Setter Property="Background" Value="{StaticResource ColorC}"/>
+        </Style>
+        <Style x:Key="DataShapeStyleC" TargetType="Shape">
+            <Setter Property="Stroke" Value="{StaticResource ColorC}"/>
+            <Setter Property="Fill" Value="{StaticResource ColorC}"/>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <ComboBox x:Name="IndependentValues" DisplayMemberPath="Description" Grid.Column="0"/>
+            <ComboBox x:Name="DependentValuesA" DisplayMemberPath="Description" Foreground="{StaticResource ColorA}" Grid.Column="1"/>
+            <ComboBox x:Name="DependentValuesB" DisplayMemberPath="Description" Foreground="{StaticResource ColorB}" Grid.Column="2"/>
+            <ComboBox x:Name="DependentValuesC" DisplayMemberPath="Description" Foreground="{StaticResource ColorC}" Grid.Column="3"/>
+            <CheckBox x:Name="Stacked100" Content="100% Stacked" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="4"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <charting:Chart
+                Grid.Column="0"
+                Grid.Row="0"
+                x:Name="StackedColumnChart"
+                Title="Stacked Column"
+                Margin="5">
+                <charting:StackedColumnSeries>
+                    <charting:SeriesDefinition
+                        ItemsSource="{Binding}"
+                        IndependentValuePath="IndependentValue"
+                        DependentValuePath="DependentValueA"
+                        DataPointStyle="{StaticResource DataPointStyleA}"/>
+                    <charting:SeriesDefinition
+                        ItemsSource="{Binding}"
+                        IndependentValuePath="IndependentValue"
+                        DependentValuePath="DependentValueB"
+                        DataPointStyle="{StaticResource DataPointStyleB}"/>
+                    <charting:SeriesDefinition
+                        ItemsSource="{Binding}"
+                        IndependentValuePath="IndependentValue"
+                        DependentValuePath="DependentValueC"
+                        DataPointStyle="{StaticResource DataPointStyleC}"/>
+                </charting:StackedColumnSeries>
+                <charting:Stacked100ColumnSeries>
+                    <charting:SeriesDefinition
+                        ItemsSource="{Binding}"
+                        IndependentValuePath="IndependentValue"
+                        DependentValuePath="DependentValueA"
+                        DataPointStyle="{StaticResource DataPointStyleA}"/>
+                    <charting:SeriesDefinition
+                        ItemsSource="{Binding}"
+                        IndependentValuePath="IndependentValue"
+                        DependentValuePath="DependentValueB"
+                        DataPointStyle="{StaticResource DataPointStyleB}"/>
+                    <charting:SeriesDefinition
+                        ItemsSource="{Binding}"
+                        IndependentValuePath="IndependentValue"
+                        DependentValuePath="DependentValueC"
+                        DataPointStyle="{StaticResource DataPointStyleC}"/>
+                </charting:Stacked100ColumnSeries>
+            </charting:Chart>
+
+            <charting:Chart
+                Grid.Column="1"
+                Grid.Row="0"
+                x:Name="StackedBarChart"
+                Title="Stacked Bar"
+                Margin="5">
+                <charting:StackedBarSeries>
+                    <charting:SeriesDefinition
+                        ItemsSource="{Binding}"
+                        IndependentValuePath="IndependentValue"
+                        DependentValuePath="DependentValueA"
+                        DataPointStyle="{StaticResource DataPointStyleA}"/>
+                    <charting:SeriesDefinition
+                        ItemsSource="{Binding}"
+                        IndependentValuePath="IndependentValue"
+                        DependentValuePath="DependentValueB"
+                        DataPointStyle="{StaticResource DataPointStyleB}"/>
+                    <charting:SeriesDefinition
+                        ItemsSource="{Binding}"
+                        IndependentValuePath="IndependentValue"
+                        DependentValuePath="DependentValueC"
+                        DataPointStyle="{StaticResource DataPointStyleC}"/>
+                </charting:StackedBarSeries>
+                <charting:Stacked100BarSeries>
+                    <charting:SeriesDefinition
+                        ItemsSource="{Binding}"
+                        IndependentValuePath="IndependentValue"
+                        DependentValuePath="DependentValueA"
+                        DataPointStyle="{StaticResource DataPointStyleA}"/>
+                    <charting:SeriesDefinition
+                        ItemsSource="{Binding}"
+                        IndependentValuePath="IndependentValue"
+                        DependentValuePath="DependentValueB"
+                        DataPointStyle="{StaticResource DataPointStyleB}"/>
+                    <charting:SeriesDefinition
+                        ItemsSource="{Binding}"
+                        IndependentValuePath="IndependentValue"
+                        DependentValuePath="DependentValueC"
+                        DataPointStyle="{StaticResource DataPointStyleC}"/>
+                </charting:Stacked100BarSeries>
+            </charting:Chart>
+
+            <charting:Chart
+                Grid.Column="0"
+                Grid.Row="1"
+                x:Name="StackedLineChart"
+                Title="Stacked Line"
+                Margin="5">
+                <charting:StackedLineSeries>
+                    <charting:SeriesDefinition
+                        ItemsSource="{Binding}"
+                        IndependentValuePath="IndependentValue"
+                        DependentValuePath="DependentValueA"
+                        DataPointStyle="{StaticResource DataPointStyleA}"
+                        DataShapeStyle="{StaticResource DataShapeStyleA}"/>
+                    <charting:SeriesDefinition
+                        ItemsSource="{Binding}"
+                        IndependentValuePath="IndependentValue"
+                        DependentValuePath="DependentValueB"
+                        DataPointStyle="{StaticResource DataPointStyleB}"
+                        DataShapeStyle="{StaticResource DataShapeStyleB}"/>
+                    <charting:SeriesDefinition
+                        ItemsSource="{Binding}"
+                        IndependentValuePath="IndependentValue"
+                        DependentValuePath="DependentValueC"
+                        DataPointStyle="{StaticResource DataPointStyleC}"
+                        DataShapeStyle="{StaticResource DataShapeStyleC}"/>
+                </charting:StackedLineSeries>
+                <charting:Stacked100LineSeries>
+                    <charting:SeriesDefinition
+                        ItemsSource="{Binding}"
+                        IndependentValuePath="IndependentValue"
+                        DependentValuePath="DependentValueA"
+                        DataPointStyle="{StaticResource DataPointStyleA}"
+                        DataShapeStyle="{StaticResource DataShapeStyleA}"/>
+                    <charting:SeriesDefinition
+                        ItemsSource="{Binding}"
+                        IndependentValuePath="IndependentValue"
+                        DependentValuePath="DependentValueB"
+                        DataPointStyle="{StaticResource DataPointStyleB}"
+                        DataShapeStyle="{StaticResource DataShapeStyleB}"/>
+                    <charting:SeriesDefinition
+                        ItemsSource="{Binding}"
+                        IndependentValuePath="IndependentValue"
+                        DependentValuePath="DependentValueC"
+                        DataPointStyle="{StaticResource DataPointStyleC}"
+                        DataShapeStyle="{StaticResource DataShapeStyleC}"/>
+                </charting:Stacked100LineSeries>
+            </charting:Chart>
+
+            <charting:Chart
+                Grid.Column="1"
+                Grid.Row="1"
+                x:Name="StackedAreaChart"
+                Title="Stacked Area"
+                Margin="5">
+                <charting:StackedAreaSeries>
+                    <charting:SeriesDefinition
+                        ItemsSource="{Binding}"
+                        IndependentValuePath="IndependentValue"
+                        DependentValuePath="DependentValueA"
+                        DataPointStyle="{StaticResource DataPointStyleA}"
+                        DataShapeStyle="{StaticResource DataShapeStyleA}"/>
+                    <charting:SeriesDefinition
+                        ItemsSource="{Binding}"
+                        IndependentValuePath="IndependentValue"
+                        DependentValuePath="DependentValueB"
+                        DataPointStyle="{StaticResource DataPointStyleB}"
+                        DataShapeStyle="{StaticResource DataShapeStyleB}"/>
+                    <charting:SeriesDefinition
+                        ItemsSource="{Binding}"
+                        IndependentValuePath="IndependentValue"
+                        DependentValuePath="DependentValueC"
+                        DataPointStyle="{StaticResource DataPointStyleC}"
+                        DataShapeStyle="{StaticResource DataShapeStyleC}"/>
+                </charting:StackedAreaSeries>
+                <charting:Stacked100AreaSeries>
+                    <charting:SeriesDefinition
+                        ItemsSource="{Binding}"
+                        IndependentValuePath="IndependentValue"
+                        DependentValuePath="DependentValueA"
+                        DataPointStyle="{StaticResource DataPointStyleA}"
+                        DataShapeStyle="{StaticResource DataShapeStyleA}"/>
+                    <charting:SeriesDefinition
+                        ItemsSource="{Binding}"
+                        IndependentValuePath="IndependentValue"
+                        DependentValuePath="DependentValueB"
+                        DataPointStyle="{StaticResource DataPointStyleB}"
+                        DataShapeStyle="{StaticResource DataShapeStyleB}"/>
+                    <charting:SeriesDefinition
+                        ItemsSource="{Binding}"
+                        IndependentValuePath="IndependentValue"
+                        DependentValuePath="DependentValueC"
+                        DataPointStyle="{StaticResource DataPointStyleC}"
+                        DataShapeStyle="{StaticResource DataShapeStyleC}"/>
+                </charting:Stacked100AreaSeries>
+            </charting:Chart>
+        </Grid>
+    </Grid>
+</UserControl>

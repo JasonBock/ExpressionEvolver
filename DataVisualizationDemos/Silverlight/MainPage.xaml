@@ -1,0 +1,107 @@
+﻿<UserControl x:Class="DataVisualizationDemos.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:DataVisualizationDemos"
+    xmlns:delay="clr-namespace:Delay">
+    <Grid>
+        <Grid.Resources>
+            <Style x:Key="HyperlinkStyle" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="Blue"/>
+                <Setter Property="TextDecorations" Value="Underline"/>
+                <Setter Property="Cursor" Value="Hand"/>
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- A selectable list of samples -->
+        <ListBox
+            ItemsSource="{Binding}"
+            DisplayMemberPath="Title"
+            SelectionChanged="ListBox_SelectionChanged"
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <local:WrapPanel/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <!-- Work around Silverlight's lack of support for Setter/Value/Binding -->
+                    <Setter
+                        Property="delay:SetterValueBindingHelper.PropertyBinding">
+                        <Setter.Value>
+                            <delay:SetterValueBindingHelper
+                                Property="Background"
+                                Binding="{Binding Background}"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Margin" Value="3 2 3 2"/>
+                    <Setter Property="Padding" Value="2"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+
+        <!-- Container for samples -->
+        <Grid
+            x:Name="SampleContainer"
+            Grid.Row="1"/>
+
+        <!-- Footer with blog link -->
+        <Grid
+            Grid.Row="2"
+            Background="#ffeeeeee">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel
+                Grid.Column="0"
+                Orientation="Horizontal"
+                Margin="4">
+                <TextBlock
+                    Text="Associated blog posts:"
+                    VerticalAlignment="Center"/>
+                <ItemsControl
+                    x:Name="PostList">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock
+                                Text="Post"
+                                Tag="{Binding}"
+                                ToolTipService.ToolTip="{Binding}"
+                                MouseLeftButtonDown="UriMouseLeftButtonDown"
+                                Style="{StaticResource HyperlinkStyle}"
+                                Margin="3 0 3 0"
+                                VerticalAlignment="Center"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+            <StackPanel
+                Grid.Column="2"
+                Orientation="Horizontal"
+                Margin="4">
+                <TextBlock
+                    Text="Version 2010-06-02 - "
+                    VerticalAlignment="Center"/>
+                <TextBlock
+                    Text="http://blogs.msdn.com/delay/"
+                    ToolTipService.ToolTip="http://blogs.msdn.com/delay/"
+                    MouseLeftButtonDown="UriMouseLeftButtonDown"
+                    Style="{StaticResource HyperlinkStyle}"
+                    VerticalAlignment="Center"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

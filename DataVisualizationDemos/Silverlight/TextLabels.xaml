@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="DataVisualizationDemos.TextLabels"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:charting="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+    xmlns:compatible="clr-namespace:System.Windows.Controls.DataVisualization.Charting.Compatible;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+    xmlns:local="clr-namespace:DataVisualizationDemos">
+
+    <UserControl.Resources>
+        <!-- Custom converter for text labels -->
+        <local:RatingToStringConverter x:Key="RatingToStringConverter"/>
+    </UserControl.Resources>
+
+    <Grid>
+        <!-- Chart of customer feedback -->
+        <charting:Chart Title="Customer Feedback">
+            <compatible:ColumnSeries
+                ItemsSource="{Binding}"
+                IndependentValuePath="Topic"
+                DependentValuePath="Rating">
+
+                <!-- Custom Y axis for text labels -->
+                <compatible:ColumnSeries.DependentRangeAxis>
+                    <charting:LinearAxis
+                        Orientation="Y"
+                        Minimum="0"
+                        Maximum="4"
+                        Interval="1"
+                        ShowGridLines="True">
+
+                        <!-- Custom style/template for text labels -->
+                        <charting:LinearAxis.AxisLabelStyle>
+                            <Style TargetType="charting:AxisLabel">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="charting:AxisLabel">
+                                            <TextBlock Text="{Binding Converter={StaticResource RatingToStringConverter}}"/>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </charting:LinearAxis.AxisLabelStyle>
+                    </charting:LinearAxis>
+                </compatible:ColumnSeries.DependentRangeAxis>
+
+                <!-- Custom style for different background -->
+                <compatible:ColumnSeries.DataPointStyle>
+                    <Style TargetType="charting:DataPoint">
+                        <Setter Property="Background" Value="#ff00a0e0"/>
+                    </Style>
+                </compatible:ColumnSeries.DataPointStyle>
+            </compatible:ColumnSeries>
+        </charting:Chart>
+    </Grid>
+</UserControl>

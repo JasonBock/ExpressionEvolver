@@ -1,0 +1,282 @@
+﻿<UserControl x:Class="DataVisualizationDemos.JellyCharting"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:charting="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+    xmlns:chartingprimitives="clr-namespace:System.Windows.Controls.DataVisualization.Charting.Primitives;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+    xmlns:local="clr-namespace:DataVisualizationDemos">
+    <Grid
+        x:Name="LayoutRoot"
+        Background="Black">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.Resources>
+            <!-- IValueConverter -->
+            <local:JellyConverter x:Key="JellyConverter"/>
+
+            <!-- Storyboards for switching charts -->
+            <Storyboard
+                x:Key="ShowLineChart">
+                <DoubleAnimation
+                    Storyboard.TargetName="LineChartScale"
+                    Storyboard.TargetProperty="ScaleX"
+                    To="1"
+                    Duration="0:0:0.3"/>
+                <DoubleAnimation
+                    Storyboard.TargetName="LineChartScale"
+                    Storyboard.TargetProperty="ScaleY"
+                    To="1"
+                    Duration="0:0:0.3"/>
+                <DoubleAnimation
+                    Storyboard.TargetName="ColumnChartScale"
+                    Storyboard.TargetProperty="ScaleX"
+                    To="0.2"
+                    Duration="0:0:0.3"/>
+                <DoubleAnimation
+                    Storyboard.TargetName="ColumnChartScale"
+                    Storyboard.TargetProperty="ScaleY"
+                    To="0.2"
+                    Duration="0:0:0.3"/>
+            </Storyboard>
+            <Storyboard
+                x:Key="ShowColumnChart">
+                <DoubleAnimation
+                    Storyboard.TargetName="ColumnChartScale"
+                    Storyboard.TargetProperty="ScaleX"
+                    To="1"
+                    Duration="0:0:0.3"/>
+                <DoubleAnimation
+                    Storyboard.TargetName="ColumnChartScale"
+                    Storyboard.TargetProperty="ScaleY"
+                    To="1"
+                    Duration="0:0:0.3"/>
+                <DoubleAnimation
+                    Storyboard.TargetName="LineChartScale"
+                    Storyboard.TargetProperty="ScaleX"
+                    To="0.2"
+                    Duration="0:0:0.3"/>
+                <DoubleAnimation
+                    Storyboard.TargetName="LineChartScale"
+                    Storyboard.TargetProperty="ScaleY"
+                    To="0.2"
+                    Duration="0:0:0.3"/>
+            </Storyboard>
+
+            <!-- Customized Chart Template -->
+            <ControlTemplate
+                x:Key="ChartTemplate"
+                TargetType="charting:Chart">
+                <Border
+                    BorderBrush="White"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    Background="Black"
+                    Padding="10">
+                    <chartingprimitives:EdgePanel
+                        x:Name="ChartArea" Style="{TemplateBinding ChartAreaStyle}">
+                    </chartingprimitives:EdgePanel>
+                </Border>
+            </ControlTemplate>
+        </Grid.Resources>
+
+        <!-- Title -->
+        <ContentControl
+            FontSize="45"
+            FontFamily="Arial"
+            FontWeight="Bold"
+            Margin="20">
+            <StackPanel
+                Orientation="Horizontal">
+                <TextBlock Text="Jelly" Foreground="White"/>
+                <TextBlock Text="Charting">
+                    <TextBlock.Foreground>
+                        <LinearGradientBrush
+                            StartPoint="0.5 0"
+                            EndPoint="0.5 1">
+                            <GradientStop Color="Cyan" Offset="0"/>
+                            <GradientStop Color="#ff3070ff" Offset="1"/>
+                        </LinearGradientBrush>
+                    </TextBlock.Foreground>
+                </TextBlock>
+            </StackPanel>
+        </ContentControl>
+
+        <!-- Container for charts -->
+        <Grid
+            x:Name="ChartContainer"
+            Grid.Row="1"
+            Margin="20 0 20 0">
+
+            <!-- Column chart -->
+            <charting:Chart
+                x:Name="ColumnChart"
+                Template="{StaticResource ChartTemplate}"
+                BorderThickness="1"
+                MouseLeftButtonDown="ShowColumnChartClick"
+                RenderTransformOrigin="1,0">
+                <charting:Chart.RenderTransform>
+                    <ScaleTransform x:Name="ColumnChartScale"/>
+                </charting:Chart.RenderTransform>
+
+                <!-- Column series -->
+                <charting:ColumnSeries
+                    ItemsSource="{Binding Converter={StaticResource JellyConverter}}"
+                    IndependentValuePath="X"
+                    DependentValuePath="Y"
+                    TransitionDuration="0">
+                    <charting:ColumnSeries.DataPointStyle>
+                        <Style TargetType="charting:ColumnDataPoint">
+                            <Setter Property="Background" Value="#ff3070ff"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="charting:ColumnDataPoint">
+                                        <Rectangle
+                                            Fill="{TemplateBinding Background}"
+                                            RadiusX="3"
+                                            RadiusY="3"/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </charting:ColumnSeries.DataPointStyle>
+                </charting:ColumnSeries>
+
+                <!-- Axes -->
+                <charting:Chart.Axes>
+                    <charting:LinearAxis
+                        Orientation="Y"
+                        Minimum="0"
+                        Maximum="9.5"
+                        Interval="1"
+                        ShowGridLines="True"
+                        Width="1"/>
+                    <charting:CategoryAxis
+                        Orientation="X"
+                        Height="1"/>
+                </charting:Chart.Axes>
+            </charting:Chart>
+
+            <!-- Line chart -->
+            <charting:Chart
+                x:Name="LineChart"
+                Template="{StaticResource ChartTemplate}"
+                BorderThickness="1"
+                MouseLeftButtonDown="ShowLineChartClick"
+                RenderTransformOrigin="1,0">
+                <charting:Chart.RenderTransform>
+                    <ScaleTransform x:Name="LineChartScale"/>
+                </charting:Chart.RenderTransform>
+
+                <!-- Line series -->
+                <charting:LineSeries
+                    ItemsSource="{Binding Converter={StaticResource JellyConverter}}"
+                    IndependentValuePath="X"
+                    DependentValuePath="Y"
+                    TransitionDuration="0">
+                    <charting:LineSeries.DataPointStyle>
+                        <Style TargetType="charting:LineDataPoint">
+                            <Setter Property="Background" Value="#ff3070ff"/>
+                            <Setter Property="Width" Value="10"/>
+                            <Setter Property="Height" Value="10"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="charting:LineDataPoint">
+                                        <Grid>
+                                            <Ellipse
+                                                Stroke="Black"
+                                                StrokeThickness="1"
+                                                Fill="{TemplateBinding Background}"/>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </charting:LineSeries.DataPointStyle>
+                    <charting:LineSeries.PolylineStyle>
+                        <Style TargetType="Polyline">
+                            <Setter Property="StrokeThickness" Value="4"/>
+                            <Setter Property="Stroke" Value="#ff3070ff"/>
+                            <Setter Property="StrokeMiterLimit" Value="1"/>
+                        </Style>
+                    </charting:LineSeries.PolylineStyle>
+                </charting:LineSeries>
+
+                <!-- Axes -->
+                <charting:Chart.Axes>
+                    <charting:LinearAxis
+                        Orientation="Y"
+                        Minimum="0.5"
+                        Maximum="9.5"
+                        Interval="1"
+                        ShowGridLines="True"
+                        Width="1"/>
+                    <charting:LinearAxis
+                        Orientation="X"
+                        Minimum="-0.01"
+                        Maximum="1.01"
+                        Height="1"/>
+                </charting:Chart.Axes>
+            </charting:Chart>
+
+        </Grid>
+
+        <!-- More button -->
+        <Button
+            Grid.Row="2"
+            Content="More Jelly!"
+            Click="MoreJelly"
+            FontSize="22"
+            FontWeight="Bold"
+            Foreground="White"
+            HorizontalAlignment="Left"
+            Margin="20"
+            Padding="20 10 20 10">
+
+            <!-- Button Template -->
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border
+                        BorderThickness="1"
+                        BorderBrush="White"
+                        CornerRadius="10"
+                        Padding="{TemplateBinding Padding}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <ColorAnimation
+                                            Storyboard.TargetName="StopA"
+                                            Storyboard.TargetProperty="Color"
+                                            To="#ffc0c0f0"
+                                            Duration="0"/>
+                                        <ColorAnimation
+                                            Storyboard.TargetName="StopB"
+                                            Storyboard.TargetProperty="Color"
+                                            To="#ff606080"
+                                            Duration="0"/>
+                                        <ColorAnimation
+                                            Storyboard.TargetName="StopC"
+                                            Storyboard.TargetProperty="Color"
+                                            To="#ff202060"
+                                            Duration="0"/>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0.5 0" EndPoint="0.5 1">
+                                <GradientStop x:Name="StopA" Color="#ffc0c0c0" Offset="0"/>
+                                <GradientStop x:Name="StopB" Color="#ff606060" Offset="0.5"/>
+                                <GradientStop x:Name="StopC" Color="#ff202020" Offset="0.5"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <ContentPresenter Content="{TemplateBinding Content}"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+    </Grid>
+</UserControl>

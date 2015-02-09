@@ -1,0 +1,401 @@
+﻿<UserControl x:Class="DataVisualizationDemos.ChartingIntroduction"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:visualizationToolkit="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+    xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+    xmlns:local="clr-namespace:DataVisualizationDemos">
+    <Grid x:Name="LayoutRoot">
+
+        <Grid.Resources>
+
+            <local:CodeElementCollection x:Key="CodeElementCollection"/>
+            <local:EngineMeasurementCollection x:Key="EngineMeasurementCollection"/>
+            <local:StockDataCollection x:Key="StockDataCollection"/>
+            <local:ScoreDataCollection x:Key="ScoreDataCollection"/>
+            <local:SalesDataCollection x:Key="SalesDataCollection"/>
+
+            <Style x:Key="CustomBubbleDataPointStyle" TargetType="chartingToolkit:BubbleDataPoint">
+                <!-- Pretty background brush -->
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <RadialGradientBrush>
+                            <RadialGradientBrush.RelativeTransform>
+                                <TransformGroup>
+                                    <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="2.09" ScaleY="1.819"/>
+                                    <TranslateTransform X="-0.425" Y="-0.486"/>
+                                </TransformGroup>
+                            </RadialGradientBrush.RelativeTransform>
+                            <GradientStop Color="#FF9DC2B3"/>
+                            <GradientStop Color="#FF1D7554" Offset="1"/>
+                        </RadialGradientBrush>
+                    </Setter.Value>
+                </Setter>
+                <!-- Template with custom ToolTip -->
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="chartingToolkit:BubbleDataPoint">
+                            <Grid>
+                                <Ellipse
+                                    Fill="{TemplateBinding Background}"
+                                    Stroke="{TemplateBinding BorderBrush}"
+                                    StrokeThickness="{TemplateBinding BorderThickness}"/>
+                                <Ellipse>
+                                    <Ellipse.Fill>
+                                        <LinearGradientBrush>
+                                            <GradientStop
+                                                Color="#77ffffff"
+                                                Offset="0"/>
+                                            <GradientStop
+                                                Color="#00ffffff"
+                                                Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                                <ToolTipService.ToolTip>
+                                    <StackPanel>
+                                        <ContentControl Content="{TemplateBinding FormattedDependentValue}"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <ContentControl Content="{TemplateBinding Size}"/>
+                                            <TextBlock Text="M"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </ToolTipService.ToolTip>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+        </Grid.Resources>
+
+        <ScrollViewer>
+            <local:WrapPanel x:Name="Container">
+
+                <Grid Width="360" Height="240" Margin="5">
+
+                    <chartingToolkit:Chart Title="My First Chart">
+                        <chartingToolkit:Chart.Series>
+                            <chartingToolkit:ColumnSeries>
+                                <chartingToolkit:ColumnSeries.ItemsSource>
+                                    <local:ObjectCollection>
+                                        <sys:Double>1</sys:Double>
+                                        <sys:Double>2</sys:Double>
+                                        <sys:Double>3</sys:Double>
+                                    </local:ObjectCollection>
+                                </chartingToolkit:ColumnSeries.ItemsSource>
+                            </chartingToolkit:ColumnSeries>
+                        </chartingToolkit:Chart.Series>
+                    </chartingToolkit:Chart>
+
+                </Grid>
+
+                <StackPanel Margin="5">
+
+                    <Grid Width="360" Height="240">
+
+                        <chartingToolkit:Chart Title="Source Code Statistics">
+                            <chartingToolkit:Chart.Series>
+                                <chartingToolkit:PieSeries
+                                    ItemsSource="{StaticResource CodeElementCollection}"
+                                    DependentValueBinding="{Binding Lines}"
+                                    IndependentValueBinding="{Binding Name}"/>
+                            </chartingToolkit:Chart.Series>
+                        </chartingToolkit:Chart>
+
+                    </Grid>
+
+                    <Button Content="Add XAML Statistics" Click="AddXamlStatistics_Click" Margin="0 10 0 0"/>
+                    <Button Content="Change Comment Statistics" Click="ChangeCommentStatistics_Click" Margin="0 10 0 0"/>
+
+                </StackPanel>
+
+                <Grid Width="360" Height="240">
+
+                    <chartingToolkit:Chart Title="Statistics (Custom Palette)">
+                        <chartingToolkit:Chart.Palette>
+                            <visualizationToolkit:ResourceDictionaryCollection>
+                                <ResourceDictionary>
+                                    <Style x:Key="DataPointStyle" TargetType="Control">
+                                        <Setter Property="Background" Value="Blue"/>
+                                    </Style>
+                                </ResourceDictionary>
+                                <ResourceDictionary>
+                                    <Style x:Key="DataPointStyle" TargetType="Control">
+                                        <Setter Property="Background" Value="Green"/>
+                                    </Style>
+                                </ResourceDictionary>
+                                <ResourceDictionary>
+                                    <Style x:Key="DataPointStyle" TargetType="Control">
+                                        <Setter Property="Background" Value="Red"/>
+                                    </Style>
+                                </ResourceDictionary>
+                            </visualizationToolkit:ResourceDictionaryCollection>
+                        </chartingToolkit:Chart.Palette>
+                        <chartingToolkit:Chart.Series>
+                            <chartingToolkit:PieSeries
+                                ItemsSource="{StaticResource CodeElementCollection}"
+                                DependentValueBinding="{Binding Lines}"
+                                IndependentValueBinding="{Binding Name}"/>
+                        </chartingToolkit:Chart.Series>
+                    </chartingToolkit:Chart>
+
+                </Grid>
+
+                <Grid Width="400" Height="320" Margin="5">
+
+                    <chartingToolkit:Chart Title="Engine Performance">
+                        <!-- Power curve -->
+                        <chartingToolkit:LineSeries
+                            Title="Power"
+                            ItemsSource="{StaticResource EngineMeasurementCollection}"
+                            IndependentValueBinding="{Binding Speed}"
+                            DependentValueBinding="{Binding Power}">
+                            <!-- Vertical axis for power curve -->
+                            <chartingToolkit:LineSeries.DependentRangeAxis>
+                                <chartingToolkit:LinearAxis
+                                    Orientation="Y"
+                                    Title="Power (hp)"
+                                    Minimum="0"
+                                    Maximum="250"
+                                    Interval="50"
+                                    ShowGridLines="True"/>
+                            </chartingToolkit:LineSeries.DependentRangeAxis>
+                        </chartingToolkit:LineSeries>
+                        <!-- Torque curve -->
+                        <chartingToolkit:LineSeries
+                            Title="Torque"
+                            ItemsSource="{StaticResource EngineMeasurementCollection}"
+                            IndependentValueBinding="{Binding Speed}"
+                            DependentValueBinding="{Binding Torque}">
+                            <!-- Vertical axis for torque curve -->
+                            <chartingToolkit:LineSeries.DependentRangeAxis>
+                                <chartingToolkit:LinearAxis
+                                    Orientation="Y"
+                                    Title="Torque (lb-ft)"
+                                    Minimum="50"
+                                    Maximum="300"
+                                    Interval="50"/>
+                            </chartingToolkit:LineSeries.DependentRangeAxis>
+                        </chartingToolkit:LineSeries>
+                        <chartingToolkit:Chart.Axes>
+                            <!-- Shared horizontal axis -->
+                            <chartingToolkit:LinearAxis
+                                Orientation="X"
+                                Title="Speed (rpm)"
+                                Interval="1000"
+                                ShowGridLines="True"/>
+                        </chartingToolkit:Chart.Axes>
+                    </chartingToolkit:Chart>
+
+                </Grid>
+
+                <Grid Width="400" Height="320" Margin="5">
+
+                    <chartingToolkit:Chart Title="Stock Performance">
+                        <!-- Stock price and volume -->
+                        <chartingToolkit:BubbleSeries
+                            Title="ABCD"
+                            ItemsSource="{StaticResource StockDataCollection}"
+                            IndependentValueBinding="{Binding Date}"
+                            DependentValueBinding="{Binding Price}"
+                            SizeValueBinding="{Binding Volume}"
+                            DataPointStyle="{StaticResource CustomBubbleDataPointStyle}"/>
+                        <chartingToolkit:Chart.Axes>
+                            <!-- Axis for custom labels -->
+                            <chartingToolkit:DateTimeAxis
+                                Orientation="X">
+                                <chartingToolkit:DateTimeAxis.AxisLabelStyle>
+                                    <Style TargetType="chartingToolkit:DateTimeAxisLabel">
+                                        <Setter Property="StringFormat" Value="{}{0:MMM d}"/>
+                                    </Style>
+                                </chartingToolkit:DateTimeAxis.AxisLabelStyle>
+                            </chartingToolkit:DateTimeAxis>
+                        </chartingToolkit:Chart.Axes>
+                    </chartingToolkit:Chart>
+
+                </Grid>
+
+                <Grid Width="400" Height="320" Margin="5">
+
+                    <chartingToolkit:Chart Title="Bowling Scores">
+                        <!-- Scores -->
+                        <chartingToolkit:ColumnSeries
+                            Title="Score"
+                            ItemsSource="{StaticResource ScoreDataCollection}"
+                            IndependentValueBinding="{Binding Player}"
+                            DependentValueBinding="{Binding Score}">
+                            <chartingToolkit:ColumnSeries.IndependentAxis>
+                                <!-- Axis for automatic sorting -->
+                                <chartingToolkit:CategoryAxis
+                                    Orientation="X"
+                                    SortOrder="Ascending"/>
+                            </chartingToolkit:ColumnSeries.IndependentAxis>
+                        </chartingToolkit:ColumnSeries>
+                    </chartingToolkit:Chart>
+
+                </Grid>
+
+                <Grid Width="400" Height="320" Margin="5">
+
+                    <chartingToolkit:Chart>
+                        <!-- Customized Title -->
+                        <chartingToolkit:Chart.Title>
+                            <StackPanel>
+                                <TextBlock
+                                    Text="Bowling Scores"
+                                    HorizontalAlignment="Center"/>
+                                <TextBlock
+                                    Text="(Alternate Approach)"
+                                    FontSize="10"
+                                    HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </chartingToolkit:Chart.Title>
+                        <!-- Scores -->
+                        <chartingToolkit:ColumnSeries
+                            Title="Score"
+                            ItemsSource="{StaticResource ScoreDataCollection}"
+                            IndependentValueBinding="{Binding}"
+                            DependentValueBinding="{Binding Score}">
+                            <chartingToolkit:ColumnSeries.IndependentAxis>
+                                <!-- Axis for automatic sorting and custom labels -->
+                                <chartingToolkit:CategoryAxis
+                                    Orientation="X"
+                                    SortOrder="Ascending">
+                                    <chartingToolkit:CategoryAxis.AxisLabelStyle>
+                                        <Style TargetType="chartingToolkit:AxisLabel">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="chartingToolkit:AxisLabel">
+                                                        <TextBlock Text="{Binding Player}"/>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </chartingToolkit:CategoryAxis.AxisLabelStyle>
+                                </chartingToolkit:CategoryAxis>
+                            </chartingToolkit:ColumnSeries.IndependentAxis>
+                        </chartingToolkit:ColumnSeries>
+                    </chartingToolkit:Chart>
+
+                </Grid>
+
+                <Grid Width="400" Height="320" Margin="5">
+
+                    <!-- Chart with shared DataContext -->
+                    <chartingToolkit:Chart
+                        Title="Pet Shop Sales Numbers"
+                        DataContext="{StaticResource SalesDataCollection}">
+                        <!-- West Store data -->
+                        <chartingToolkit:LineSeries
+                            Title="West Store"
+                            ItemsSource="{Binding}"
+                            IndependentValuePath="Animal"
+                            DependentValuePath="WestStoreQuantity"/>
+                        <!-- East Store data -->
+                        <chartingToolkit:LineSeries
+                            Title="East Store"
+                            ItemsSource="{Binding}"
+                            IndependentValuePath="Animal"
+                            DependentValuePath="EastStoreQuantity"/>
+                    </chartingToolkit:Chart>
+
+                </Grid>
+
+                <Grid Width="400" Height="320" Margin="5">
+
+                    <chartingToolkit:Chart
+                        Title="Stock Performance Revisited"
+                        LegendTitle="Data">
+                        <!-- Volume -->
+                        <chartingToolkit:AreaSeries
+                            Title="Volume (M)"
+                            ItemsSource="{StaticResource StockDataCollection}"
+                            IndependentValuePath="Date"
+                            DependentValuePath="Volume"/>
+                        <!-- Price -->
+                        <chartingToolkit:AreaSeries
+                            Title="Price ($)"
+                            ItemsSource="{StaticResource StockDataCollection}"
+                            IndependentValuePath="Date"
+                            DependentValuePath="Price"/>
+                        <chartingToolkit:Chart.Axes>
+                            <!-- Axis for custom range -->
+                            <chartingToolkit:LinearAxis
+                                Orientation="Y"
+                                Minimum="0"
+                                Maximum="100"
+                                ShowGridLines="True"/>
+                            <!-- Axis for custom labels -->
+                            <chartingToolkit:DateTimeAxis
+                                Orientation="X">
+                                <chartingToolkit:DateTimeAxis.AxisLabelStyle>
+                                    <Style TargetType="chartingToolkit:DateTimeAxisLabel">
+                                        <Setter Property="StringFormat" Value="{}{0:MMM d}"/>
+                                    </Style>
+                                </chartingToolkit:DateTimeAxis.AxisLabelStyle>
+                            </chartingToolkit:DateTimeAxis>
+                        </chartingToolkit:Chart.Axes>
+                    </chartingToolkit:Chart>
+
+                </Grid>
+
+                <Grid Width="400" Height="320" Margin="5">
+
+                    <!-- Stacked Line Series -->
+                    <chartingToolkit:Chart
+                        Title="Pet Shop Sales Revisited - Totals"
+                        DataContext="{StaticResource SalesDataCollection}">
+                        <chartingToolkit:StackedLineSeries>
+                            <!-- West Store data -->
+                            <chartingToolkit:SeriesDefinition
+                                Title="West Store"
+                                ItemsSource="{Binding}"
+                                IndependentValuePath="Animal"
+                                DependentValuePath="WestStoreQuantity"/>
+                            <!-- East Store data -->
+                            <chartingToolkit:SeriesDefinition
+                                Title="East Store"
+                                ItemsSource="{Binding}"
+                                IndependentValuePath="Animal"
+                                DependentValuePath="EastStoreQuantity"/>
+                        </chartingToolkit:StackedLineSeries>
+                        <chartingToolkit:Chart.Axes>
+                            <chartingToolkit:LinearAxis
+                                Orientation="Y"
+                                Minimum="0"
+                                ShowGridLines="True"/>
+                        </chartingToolkit:Chart.Axes>
+                    </chartingToolkit:Chart>
+
+                </Grid>
+
+                <Grid Width="400" Height="320" Margin="5">
+
+                    <!-- Stacked 100% Column Series -->
+                    <chartingToolkit:Chart
+                        Title="Pet Shop Sales Revisited - Percentages"
+                        DataContext="{StaticResource SalesDataCollection}">
+                        <chartingToolkit:Stacked100ColumnSeries>
+                            <!-- West Store data -->
+                            <chartingToolkit:SeriesDefinition
+                                Title="West Store"
+                                ItemsSource="{Binding}"
+                                IndependentValuePath="Animal"
+                                DependentValuePath="WestStoreQuantity"/>
+                            <!-- East Store data -->
+                            <chartingToolkit:SeriesDefinition
+                                Title="East Store"
+                                ItemsSource="{Binding}"
+                                IndependentValuePath="Animal"
+                                DependentValuePath="EastStoreQuantity"/>
+                        </chartingToolkit:Stacked100ColumnSeries>
+                    </chartingToolkit:Chart>
+
+                </Grid>
+
+            </local:WrapPanel>
+        </ScrollViewer>
+
+    </Grid>
+</UserControl>

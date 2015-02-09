@@ -1,0 +1,114 @@
+﻿<UserControl x:Class="DataVisualizationDemos.DynamicPieGradients"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:datavis="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+    xmlns:charting="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+    xmlns:local="clr-namespace:DataVisualizationDemos">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <charting:Chart x:Name="Example1" Title="Example1" Grid.Row="0" Margin="2">
+            <charting:Chart.Series>
+                <charting:PieSeries>
+                    <charting:PieSeries.Palette>
+                        <datavis:ResourceDictionaryCollection>
+                            <ResourceDictionary>
+                                <Style x:Key="DataPointStyle" TargetType="charting:PieDataPoint">
+                                    <Setter Property="Background">
+                                        <Setter.Value>
+                                            <LinearGradientBrush MappingMode="Absolute">
+                                                <GradientStop Color="Red" Offset="0.2"/>
+                                                <GradientStop Color="Green" Offset="0.45"/>
+                                                <GradientStop Color="Blue" Offset="0.55"/>
+                                                <GradientStop Color="Pink" Offset="0.8"/>
+                                            </LinearGradientBrush>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ResourceDictionary>
+                        </datavis:ResourceDictionaryCollection>
+                    </charting:PieSeries.Palette>
+                    <charting:PieSeries.ItemsSource>
+                        <local:ObjectCollection>
+                            <sys:Double>1</sys:Double>
+                            <sys:Double>2.3</sys:Double>
+                            <sys:Double>3.6</sys:Double>
+                            <sys:Double>5</sys:Double>
+                        </local:ObjectCollection>
+                    </charting:PieSeries.ItemsSource>
+                </charting:PieSeries>
+            </charting:Chart.Series>
+        </charting:Chart>
+
+        <charting:Chart x:Name="Example2" Title="Example2" Grid.Row="1" Margin="2 0 2 2">
+            <charting:Chart.Series>
+                <charting:PieSeries>
+                    <charting:PieSeries.Palette>
+                        <datavis:ResourceDictionaryCollection>
+                            <ResourceDictionary>
+                                <Style x:Key="DataPointStyle" TargetType="charting:PieDataPoint">
+                                    <Setter Property="Background">
+                                        <Setter.Value>
+                                            <RadialGradientBrush MappingMode="Absolute">
+                                                <GradientStop Color="Blue" Offset="0.9"/>
+                                                <GradientStop Color="DarkBlue" Offset="1.0"/>
+                                            </RadialGradientBrush>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ResourceDictionary>
+                            <ResourceDictionary>
+                                <Style x:Key="DataPointStyle" TargetType="charting:PieDataPoint">
+                                    <Setter Property="Background">
+                                        <Setter.Value>
+                                            <RadialGradientBrush MappingMode="Absolute">
+                                                <GradientStop Color="Yellow" Offset="0.8"/>
+                                                <GradientStop Color="Orange" Offset="1.0"/>
+                                            </RadialGradientBrush>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ResourceDictionary>
+                            <ResourceDictionary>
+                                <Style x:Key="DataPointStyle" TargetType="charting:PieDataPoint">
+                                    <Setter Property="Background">
+                                        <Setter.Value>
+                                            <RadialGradientBrush MappingMode="Absolute">
+                                                <GradientStop Color="Red" Offset="0.8"/>
+                                                <GradientStop Color="DarkRed" Offset="1.0"/>
+                                            </RadialGradientBrush>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ResourceDictionary>
+                            <ResourceDictionary>
+                                <Style x:Key="DataPointStyle" TargetType="charting:PieDataPoint">
+                                    <Setter Property="Background">
+                                        <Setter.Value>
+                                            <RadialGradientBrush MappingMode="Absolute">
+                                                <GradientStop Color="Green" Offset="0.8"/>
+                                                <GradientStop Color="DarkGreen" Offset="1.0"/>
+                                            </RadialGradientBrush>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ResourceDictionary>
+                        </datavis:ResourceDictionaryCollection>
+                    </charting:PieSeries.Palette>
+                    <charting:PieSeries.ItemsSource>
+                        <local:ObjectCollection>
+                            <sys:Double>1</sys:Double>
+                            <sys:Double>2.3</sys:Double>
+                            <sys:Double>3.6</sys:Double>
+                            <sys:Double>5</sys:Double>
+                        </local:ObjectCollection>
+                    </charting:PieSeries.ItemsSource>
+                </charting:PieSeries>
+            </charting:Chart.Series>
+        </charting:Chart>
+    </Grid>
+</UserControl>

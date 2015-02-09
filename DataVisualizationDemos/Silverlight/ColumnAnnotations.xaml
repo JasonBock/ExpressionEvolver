@@ -1,0 +1,85 @@
+﻿<UserControl x:Class="DataVisualizationDemos.ColumnAnnotations"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:charting="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0" Margin="10">
+            <charting:Chart
+                Title="Simple Column Annotations - Bottom">
+                <charting:ColumnSeries
+                    DependentValuePath="Value"
+                    IndependentValuePath="Key"
+                    ItemsSource="{Binding}">
+                    <charting:ColumnSeries.DataPointStyle>
+                        <Style TargetType="charting:ColumnDataPoint">
+                            <Setter Property="Background" Value="Yellow"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="charting:ColumnDataPoint">
+                                        <Grid>
+                                            <Rectangle
+                                                Fill="{TemplateBinding Background}"
+                                                Stroke="Black"/>
+                                            <Grid
+                                                Background="#aaffffff"
+                                                Margin="0 -20 0 0"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Bottom">
+                                                <TextBlock
+                                                    Text="{TemplateBinding FormattedDependentValue}"
+                                                    FontWeight="Bold"
+                                                    Margin="2"/>
+                                            </Grid>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </charting:ColumnSeries.DataPointStyle>
+                </charting:ColumnSeries>
+            </charting:Chart>
+        </Grid>
+
+        <Grid Grid.Column="1" Margin="10">
+            <charting:Chart
+                Title="Simple Column Annotations - Top">
+                <charting:ColumnSeries
+                    DependentValuePath="Value"
+                    IndependentValuePath="Key"
+                    ItemsSource="{Binding}">
+                    <charting:ColumnSeries.DataPointStyle>
+                        <Style TargetType="charting:ColumnDataPoint">
+                            <Setter Property="Background" Value="Yellow"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="charting:ColumnDataPoint">
+                                        <Grid>
+                                            <Rectangle
+                                                Fill="{TemplateBinding Background}"
+                                                Stroke="Black"/>
+                                            <Grid
+                                                Background="#aaffffff"
+                                                Margin="0 -20 0 0"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Top">
+                                                <TextBlock
+                                                    Text="{TemplateBinding FormattedDependentValue}"
+                                                    FontWeight="Bold"
+                                                    Margin="2"/>
+                                            </Grid>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </charting:ColumnSeries.DataPointStyle>
+                </charting:ColumnSeries>
+            </charting:Chart>
+        </Grid>
+    </Grid>
+</UserControl>

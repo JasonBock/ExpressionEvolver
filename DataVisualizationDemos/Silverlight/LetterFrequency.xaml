@@ -1,0 +1,107 @@
+﻿<UserControl x:Class="DataVisualizationDemos.LetterFrequency"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TextBox
+            x:Name="Text"
+            Text="Test text"
+            TextChanged="TextBox_TextChanged"
+            Margin="2"/>
+
+        <Grid
+            x:Name="ChartGrid"
+            Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <chartingToolkit:Chart
+                Grid.Column="0"
+                Grid.Row="0">
+                <chartingToolkit:AreaSeries
+                    ItemsSource="{Binding}"
+                    DependentValuePath="Count"
+                    IndependentValuePath="Ordinal"/>
+            </chartingToolkit:Chart>
+
+            <chartingToolkit:Chart
+                Grid.Column="1"
+                Grid.Row="0">
+                <chartingToolkit:BarSeries
+                    ItemsSource="{Binding}"
+                    DependentValuePath="Count"
+                    IndependentValuePath="Character">
+                    <chartingToolkit:BarSeries.IndependentAxis>
+                        <chartingToolkit:CategoryAxis
+                            Orientation="Y"
+                            SortOrder="Ascending"/>
+                    </chartingToolkit:BarSeries.IndependentAxis>
+                </chartingToolkit:BarSeries>
+            </chartingToolkit:Chart>
+
+            <chartingToolkit:Chart
+                Grid.Column="2"
+                Grid.Row="0">
+                <chartingToolkit:BubbleSeries
+                    ItemsSource="{Binding}"
+                    DependentValuePath="Count"
+                    IndependentValuePath="Ordinal"/>
+            </chartingToolkit:Chart>
+
+            <chartingToolkit:Chart
+                Grid.Column="0"
+                Grid.Row="1">
+                <chartingToolkit:ColumnSeries
+                    ItemsSource="{Binding}"
+                    DependentValuePath="Count"
+                    IndependentValuePath="Character">
+                    <chartingToolkit:ColumnSeries.IndependentAxis>
+                        <chartingToolkit:CategoryAxis
+                            Orientation="X"
+                            SortOrder="Ascending"/>
+                    </chartingToolkit:ColumnSeries.IndependentAxis>
+                </chartingToolkit:ColumnSeries>
+            </chartingToolkit:Chart>
+
+            <chartingToolkit:Chart
+                Grid.Column="1"
+                Grid.Row="1">
+                <chartingToolkit:LineSeries
+                    ItemsSource="{Binding}"
+                    DependentValuePath="Count"
+                    IndependentValuePath="Ordinal"/>
+            </chartingToolkit:Chart>
+
+            <chartingToolkit:Chart
+                Grid.Column="2"
+                Grid.Row="1">
+                <chartingToolkit:PieSeries
+                    ItemsSource="{Binding}"
+                    DependentValuePath="Count"
+                    IndependentValuePath="Character"/>
+            </chartingToolkit:Chart>
+
+            <chartingToolkit:Chart
+                Grid.Column="0"
+                Grid.Row="2">
+                <chartingToolkit:ScatterSeries
+                    ItemsSource="{Binding}"
+                    DependentValuePath="Count"
+                    IndependentValuePath="Ordinal"/>
+            </chartingToolkit:Chart>
+        </Grid>
+    </Grid>
+</UserControl>

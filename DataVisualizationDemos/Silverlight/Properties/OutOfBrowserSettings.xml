@@ -1,0 +1,12 @@
+<OutOfBrowserSettings ShortName="DataVisualizationDemosSL" EnableGPUAcceleration="False" ShowInstallMenuItem="True">
+  <OutOfBrowserSettings.Blurb>A collection of DataVisualization samples from Delay's blog (http://blogs.msdn.com/delay/).</OutOfBrowserSettings.Blurb>
+  <OutOfBrowserSettings.WindowSettings>
+    <WindowSettings Title="DataVisualizationDemosSL" />
+  </OutOfBrowserSettings.WindowSettings>
+  <OutOfBrowserSettings.Icons>
+    <Icon Size="16,16">Images/DataVisualizationDemos-16.png</Icon>
+    <Icon Size="32,32">Images/DataVisualizationDemos-32.png</Icon>
+    <Icon Size="48,48">Images/DataVisualizationDemos-48.png</Icon>
+    <Icon Size="128,128">Images/DataVisualizationDemos-128.png</Icon>
+  </OutOfBrowserSettings.Icons>
+</OutOfBrowserSettings>

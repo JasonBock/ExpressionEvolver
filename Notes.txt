@@ -1,0 +1,13 @@
+Change fitness value to be a generic type instead of just being a double.
+
+The mutation can create nodes that are bigger than the one it replaces. Confusion over operation and node count. Need to address that.
+
+Allow multivariate functions
+
+I wonder if the SelectFittestChildren grabs too many good ones.
+
+I wonder if I can add to the fitness "computation" time. That may be hard, maybe do that with every 100th generation, I dunno, but the "quicker" the better.
+
+Make sure the penalty for excessive tree size is aggressive enough. (Relative to maximum node size count). Also consider making smaller than expected a better fitness value.
+
+Look to see if we don't need to do that weird parameter visitation. just get the initial set of params from the source expression, create new ones and replace anything that matches the name.
