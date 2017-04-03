@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace ExpressionEvolver.Client.Windows
@@ -28,6 +29,45 @@ namespace ExpressionEvolver.Client.Windows
 			this.IsEvolveEnabled = true;
 		}
 
+		public async Task EvolveAsync()
+		{
+			this.IsEvolveEnabled = false;
+
+			var baker = new Baker<Func<double, double>>(this.Expression);
+			var func = baker.Bake();
+
+			using (var parameters = new ExpressionEvolverGeneticAlgorithmParameters(func.Compile()))
+			{
+				var generationCount = 1;
+
+				this.AcceptableFitnessValue = parameters.AcceptableAverageMeanSquareError.ToString("#.00");
+				this.BaseLine = this.GetPoints(parameters.Results);
+
+            await Task.Factory.StartNew(() =>
+				{
+					var ga = new GeneticAlgorithm<Expression<Func<double, double>>>(parameters);
+
+					var generationCompletedHandler = new EventHandler<EventArgs<Population<Expression<Func<double, double>>>>>(
+						(gs, ge) =>
+						{
+							if (generationCount % 10 == 0)
+							{
+								this.PrintPopulation(ge.Value, generationCount, parameters.Results);
+							}
+
+							generationCount++;
+						});
+					ga.GenerationCompleted += generationCompletedHandler;
+					ga.Run();
+					ga.GenerationCompleted -= generationCompletedHandler;
+
+					this.PrintPopulation(ga.Final, generationCount, parameters.Results);
+				});
+			}
+
+			this.IsEvolveEnabled = true;
+		}
+
 		public void Evolve()
 		{
 			this.IsEvolveEnabled = false;
@@ -40,6 +80,7 @@ namespace ExpressionEvolver.Client.Windows
 
 			this.AcceptableFitnessValue = parameters.AcceptableAverageMeanSquareError.ToString("#.00");
 			this.BaseLine = this.GetPoints(parameters.Results);
+
 
 			this.worker = new BackgroundWorker();
 			this.worker.WorkerReportsProgress = true;

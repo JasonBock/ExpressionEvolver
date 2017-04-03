@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 
 namespace ExpressionEvolver.Client.Windows
 {
@@ -11,9 +10,10 @@ namespace ExpressionEvolver.Client.Windows
 			this.DataContext = new MainWindowViewModel();
 		}
 
-		private void OnEvolveClick(object sender, RoutedEventArgs e)
+		private async void OnEvolveClick(object sender, RoutedEventArgs e)
 		{
-			(this.DataContext as MainWindowViewModel).Evolve();
+			//(this.DataContext as MainWindowViewModel).Evolve();
+			await (this.DataContext as MainWindowViewModel).EvolveAsync();
 		}
 	}
 }
