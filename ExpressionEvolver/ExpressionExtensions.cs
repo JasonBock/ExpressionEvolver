@@ -9,7 +9,7 @@ namespace ExpressionEvolver
 	public static class ExpressionExtensions
 	{
 		private const string ContentNaN = "NaN";
-		private const string ContentInfinity = "Infinity";
+		private const string ContentInfinity = "∞";
 
 		public static Expression Compress(this Expression @this)
 		{
