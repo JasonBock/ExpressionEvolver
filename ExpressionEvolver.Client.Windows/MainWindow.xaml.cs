@@ -12,7 +12,6 @@ namespace ExpressionEvolver.Client.Windows
 
 		private async void OnEvolveClick(object sender, RoutedEventArgs e)
 		{
-			//(this.DataContext as MainWindowViewModel).Evolve();
 			await (this.DataContext as MainWindowViewModel).EvolveAsync();
 		}
 	}
